@@ -28,7 +28,7 @@ const initialState = {
     value: 0,
 };
 
-const counterReducer = (state = initialState, action) => {
+const CounterReducer = (state = initialState, action) => {
     switch (action.type) {
         case INCREMENT:
             return { ...state, value: state.value + 1 };
@@ -45,4 +45,4 @@ const counterReducer = (state = initialState, action) => {
     }
 };
 
-export default counterReducer;
+export default CounterReducer;
