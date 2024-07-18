@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchUsersAction } from '../redux/Actions';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const UserCard = ({ id, name, username, email, onClick }) => {
-    const dispatch = useDispatch();
-    const [clicked, setClicked] = useState(false);
+const UserCard = ({ id, name, username, email }) => {
+    const navigate = useNavigate();
 
-    const handleCardClick = async () => {
-        setClicked(true);
-        try {
-            await dispatch(fetchUsersAction(id));
-        } catch (error) {
-            console.error('Error fetching user:', error);
-        }
+    const handleCardClick = () => {
+        navigate(`/users/${id}`);
     };
 
     return (
@@ -40,7 +33,6 @@ const UserCard = ({ id, name, username, email, onClick }) => {
             <h1 style={{ fontSize: '16px', margin: '8px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{name}</h1>
             <p style={{ fontSize: '14px', margin: '4px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{username}</p>
             <p style={{ fontSize: '12px', margin: '4px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{email}</p>
-            {clicked && <p style={{ fontSize: '12px', margin: '4px 0', color: 'gray' }}>ID: {id}</p>}
         </div>
     );
 };

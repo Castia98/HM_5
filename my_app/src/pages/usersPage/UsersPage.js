@@ -1,28 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsersAction } from '../../redux/Actions';
-import UserCard from '../../components/UserCard';
+import { fetchUsersAction} from "../../redux/Actions";
+import UserCard from "../../components/UserCard";
 
 const UsersPage = () => {
     const users = useSelector(state => state.TitleReducer.users);
     const dispatch = useDispatch();
 
-    const handleCardClick = async (userId) => {
-        try {
-            await dispatch(fetchUsersAction(userId));
-        } catch (error) {
-            console.error('Error fetching user:', error);
-        }
-    };
+    useEffect(() => {
+        dispatch(fetchUsersAction());
+    }, [dispatch]);
 
     return (
         <div style={{ textAlign: 'center', padding: '16px' }}>
-            <button
-                style={{ marginBottom: '16px', padding: '8px 16px', cursor: 'pointer' }}
-                onClick={() => { dispatch(fetchUsersAction()) }}
-            >
-                Get Users
-            </button>
             <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -38,7 +28,6 @@ const UsersPage = () => {
                         name={user.name}
                         username={user.username}
                         email={user.email}
-                        onClick={() => handleCardClick(user.id)}
                     />
                 ))}
             </div>
