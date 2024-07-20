@@ -31,7 +31,7 @@ const CalcPage = () => {
         dispatch(toggleSign());
     };
 
-    // Показать текущее выражение или значение
+
     const displayValue = previousValue ? `${previousValue} ${currentValue}` : currentValue;
 
     return (
